@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Rock, Paper, Scissors</title>
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Rock, Paper, Scissors</h1>
+
+    <div id="gamefield">
+      <div id="player1" class="player"></div>
+      <div id="player2" class="player"></div>
+    </div>
+
+    <div id="buttons">
+      <button id="rock"></button>
+      <button id="paper"></button>
+      <button id="scissors"></button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+      const choices = ["rock", "paper", "scissors"];
+      const buttons = document.querySelectorAll("button");
+      const result = document.querySelector("#result");
+      document.querySelector(".player").classList.remove("rock", "scissors");
+      document.querySelector(".player").classList.add("paper");
+      document.querySelector("#player2").classList.remove("rock", "scissors");
+      document.querySelector("#player2").classList.add("paper");
+
+      const getComputerChoice = () => {
+        return choices[Math.floor(Math.random() * choices.length)];
+      };
+
+      const determineWinner = (playerChoice, computerChoice) => {
+        document.querySelector(".player").classList.add("shake");
+        document.querySelector("#player2").classList.add("shake");
+        if (playerChoice === computerChoice) {
+          return "It's a tie!";
+        } else if ((playerChoice === "rock" && computerChoice === "scissors") || (playerChoice === "paper" && computerChoice === "rock") || (playerChoice === "scissors" && computerChoice === "paper")) {
+          return "You win!!";
+        } else {
+          return "You loss!";
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const playerChoice = e.target.id;
+          const computerChoice = getComputerChoice();
+          result.textContent = determineWinner(playerChoice, computerChoice);
+        });
+      });
+    </script>
+  </body>
+</html>
