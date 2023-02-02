@@ -1,3 +1,5 @@
+<!-- ChatGPT was used for helping with setting the if-statement op and makeing it Function -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,11 +34,15 @@
       document.querySelector("#player2").classList.remove("rock", "scissors");
       document.querySelector("#player2").classList.add("paper");
 
+      // Function for getting the computer's choice
       const getComputerChoice = () => {
+        // Generating a random number and returning the corresponding game choice
         return choices[Math.floor(Math.random() * choices.length)];
       };
 
+      // Function to determine the winner of the game based on player and computer choices
       const determineWinner = (playerChoice, computerChoice) => {
+        // Adding "shake" class to both players for animation effect
         document.querySelector(".player").classList.add("shake");
         document.querySelector("#player2").classList.add("shake");
         if (playerChoice === computerChoice) {
@@ -48,10 +54,14 @@
         }
       };
 
+      // Add click event listener to each button to play the game
       buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
+          // Get the player's choice
           const playerChoice = e.target.id;
+          // Get the computer's choice
           const computerChoice = getComputerChoice();
+          // Determine the winner and display the result
           result.textContent = determineWinner(playerChoice, computerChoice);
         });
       });
